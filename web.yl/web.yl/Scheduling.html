@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>医生排班</title>
+</head>
+<body>
+<!--导航栏-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">东方医院 🏥</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item  mx-3">
+          <a class="nav-link" href="./indexPatient.html">首页 <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item mx-3">
+            <a class="nav-link" href="./Department.html">科室导航</a>
+        </li>
+  
+        <li class="nav-item mx-3" >
+            <a class="nav-link active" href="./Scheduling.html">医生排班</a>
+        </li>
+
+        <li class="nav-item mx-3" >
+            <a class="nav-link" href="#">预约挂号</a>
+        </li>
+
+        <li class="nav-item mx-3" >
+            <a class="nav-link" href="./HospitalImfo.html">医院概况</a>
+        </li>
+          
+      </ul>
+    </div>
+</nav>
+<!-- 巨幕 -->
+<!-- <div class="jumbotron jumbotron-fluid pb-3 pt-5 mb-0">
+    <div class="container">
+      <h1 class="display-4">门诊排班</h1>
+      <p class="lead">东方医院</p>
+    </div>
+</div> -->
+    <!-- 巨幕下导航
+<nav class="breadcrumb">
+        <a class="breadcrumb-item" href="first.html">科室导航</a>
+        <span class="breadcrumb-item active">门诊排班</span>
+        <a class="breadcrumb-item" href="configration.html">就诊人管理</a>
+        <a class="breadcrumb-item" href="appointment.html">预约挂号</a>
+</nav > -->
+ <!-- 中心部分 -->
+      <!-- 标题 -->
+      <div class="container mt-5 text-center">
+       <p><span class="lead"style="font-size:2rem">医生排班</span></p> 
+      </div>
+      <!-- 表格 -->
+      <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-bordered ">
+                    <thead>
+                      <tr>
+                        <th scope="col">星期一</th>
+                        <th scope="col">星期二</th>
+                        <th scope="col">星期三</th>
+                        <th scope="col">星期四</th>
+                        <th scope="col">星期五</th>
+                        <th scope="col">星期六</th>
+                        <th scope="col">星期日</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 一行叫tr-->
+                      <tr>
+                      <!-- 每行七个td -->
+                        <td>6/28
+                        
+                           <div class="float-right">
+                                华佗
+                                <span class="badge badge-danger">主任医师</span>
+                           </div>
+                        </br>
+                        </td>
+                     
+                      </tr>
+                     
+    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+      <!-- 尾部 -->
+        <!-- Footer -->
+        <div class="jumbotron jumbotron-fluid ">
+            <div class="container">
+    
+                  <p class="lead text-center font-weight-lighter">copyright HRYXYLHLJZSN@2022</p>
+     
+             </div>
+        </div>
+</body>
+</html>

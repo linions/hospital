@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 图标库 -->
+    <script src="https://kit.fontawesome.com/14e0b8159c.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <!-- 导入 vue 库文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+  <!-- 从 CDN 导入 axios  -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <title>预约信息</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">东方医院🏥
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item  mx-3">
+          <a class="nav-link active" href="./HomePage.html">首页 <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item mx-3" >
+          <div class="dropdown">
+            <a class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">医院概况</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="./HospitalInfo.html">医院简介</a>
+              <a class="dropdown-item" href="./HospitalCultrue.html">医院文化</a>
+              <a class="dropdown-item" href="./HospitalHistroy.html">医院历史</a>
+            </div>
+          </div>
+      </li>
+
+        <li class="nav-item mx-3">
+            <a class="nav-link" href="./Department.html">科室导航</a>
+        </li>
+  
+        <li class="nav-item mx-3" >
+          <div class="dropdown">
+            <a class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">医疗服务</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="#">就诊须知</a>
+              <a class="dropdown-item" href="#">住院须知</a>
+              <a class="dropdown-item" href="#">门诊排班</a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item mx-3" >
+            <a class="nav-link" href="#">健康知识</a>
+        </li>
+
+        <li class="nav-item mx-3" >
+          <a class="nav-link " href="#">信息咨询</a>
+        </li>
+
+        <li class="nav-item mx-3" >
+          <a class="nav-link " href="#">通知公告</a>
+        </li>
+
+        
+        
+
+
+       
+      </ul>
+    </div>
+</nav>
+    <!-- 预约信息显示 -->
+    <div  id = "app" class="container">
+      <div class="row">
+        <div class="col-6" v-for="(item, index) in pList" :key="index">
+          <div class="col-lg-12 mt-5 text-center mb-5">
+              <div class="card">
+                  <div class="card-header">
+                    预约详情
+                  </div>
+                  <div class="card-body"  >
+                    <template>
+                        <p class="card-title">订单号：{{item.id}}</p >
+                        <p class="card-title">姓名：{{item.pname}}</p >
+                        <p class="card-title">身份证号：{{item.id_card}}</p >
+                        <p class="card-title">就诊序号：{{item.num}}</p >
+                        <p class="card-title">看诊时间：{{item.time}}</p >
+                        <p class="card-title">科室：{{item.clinic}}</p >
+                        <p class="card-title">医生：{{item.dname}}</p >
+                        <p class="card-title">挂号时间：{{item.generate}}</p >
+                        <p class="card-title">挂号费用：{{item.fees}}</p >
+                    </template>
+                    <!-- <a href="#" class="btn btn-primary">取消预约</a> -->
+
+                    <!-- Button trigger modal -->
+                    <button   type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                      取消预约
+                    </button>
+                    
+
+                    <!-- Modal -->
+                    <div  class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">取消须知</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <h5>如有需要，请致电医院热线或扫码关注。</h5>
+                            <h5>联系电话：18652376378</h5>
+                            <img src="./img/qrcode.png">
+                            
+                            
+                          </div>
+                          <div class="modal-footer" >
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+
+
+                            <a href="./AppointmentInfo.html">
+
+                              <button type="button" @click="remove(item.id)" class="btn btn-primary">确认</button>
+                            </a>
+
+
+                            <!-- <button type="button" @click="remove(item.id)" class="btn btn-primary">确认</button> -->
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                  </div>
+                </div>
+          </div>
+      </div>
+      </div>
+        
+    </div>
+     <!-- Footer -->
+    <div class="jumbotron jumbotron-fluid ">
+     <div class="container">
+        
+        <p class="lead text-center">copyright HRYXYLHLJZSN@2022</p >
+         
+     </div>
+    </div>
+
+    <script>
+      let vm = new Vue({
+        el:'#app',
+        data: {
+          pList: [],
+          id_card: '',
+
+
+
+        },
+
+        methods: {
+
+          load(){
+            let url = 'http://localhost:8080/hospital/select/'+ this.id_card ;
+            axios.get(url).then(res => {
+              this.pList = res.data;
+            console.log(this.pList);
+            }).catch(err => {
+                console.log(err)
+          })
+            
+            },
+          remove(aid) {
+            let url = 'http://localhost:8080/hospital/delete/' + aid;
+            axios.delete(url).then(res => {
+              this.load();
+            }).catch(err => {
+              console.error(err)
+            }) //删除用delete
+            // window.location.reload();      
+          //  Location.href="./";
+            //  location.reload();
+          },
+        
+
+        },
+    
+        
+        created() {
+          this.id_card=localStorage.value;
+          console.log(this.id_card);
+
+          let url = 'http://localhost:8080/hospital/select/'+this.id_card;
+          axios.get(url).then(res => {
+            this.pList = res.data;
+            console.log(this.pList);
+          }).catch(err => {
+            console.log(err)
+          })
+
+
+      },
+
+      })
+    </script>
+
+    
+
+
+</body>
+</html>

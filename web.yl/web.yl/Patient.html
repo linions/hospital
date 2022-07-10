@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>就诊人管理</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- 导入 vue 库文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <!-- 从 CDN 导入 axios  -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    
+    
+</head>
+<body>
+<!-- 导航 -->
+    <!-- 导航 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">东方医院 🏥</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active mx-3">
+            <a class="nav-link" href="./indexPatient.html">首页 <span class="sr-only">(current)</span></a>
+          </li>
+
+          <li class="nav-item mx-3">
+              <a class="nav-link" href="./Department.html">科室导航</a>
+          </li>
+    
+          <!-- <li class="nav-item mx-3" >
+              <a class="nav-link" href="./Scheduling.html">医生排班</a>
+          </li> -->
+
+          <li class="nav-item mx-3" >
+              <a class="nav-link" href="./HospitalImfo.html">医院概况</a>
+          </li>
+          
+
+
+         
+        </ul>
+      </div>
+  </nav>
+<!-- 中心部分 -->
+<!-- 巨幕
+<div class="jumbotron jumbotron-fluid pb-3 pt-5 mb-0">
+    <div class="container">
+      <h1 class="display-4">就诊人管理</h1>
+      <p class="lead">东方医院</p>
+    </div>
+</div> -->
+
+<!-- 主体部分 -->
+<div class="container" id="app">
+    <div class="row ">
+        <h2 class="text-center col-lg-12 mt-5">患者信息</p>
+            <!-- <button type="button" 
+            class="btn btn-success my-3" 
+            data-toggle="modal" 
+            data-target="#modalId">新增就诊人</button> -->
+
+            <!-- Modal -->
+            <!-- <div class="modal fade" id="modalId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">新增就诊人</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                     <span aria-hidden="true">&times;</span>
+                                  </button>
+                  </div>
+                  <div class="modal-body">
+                    
+                    <form action="">
+                      <div class="form-group">
+                        <label for="name">就诊人姓名</label>
+                        <input
+                          v-model="name"
+                          type="text" 
+                          class="form-control" 
+                          name="name" 
+                          id="name"
+                          aria-describedby="helpId" placeholder="就诊人"
+                          />
+                      </div>
+                      <div class="form-group">
+                        <label for="id_card">身份证号</label>
+                        <input 
+                          v-model="id_card"
+                          type="text" 
+                          maxlength="18"
+                          class="form-control" 
+                          name="id_card" 
+                          id="id_card"
+                          aria-describedby="helpId" placeholder="身份证"
+                          />
+                      </div>
+                      <div class="form-group">
+                        <label for="phone">手机号</label>
+                        <input 
+                          v-model="phone"
+                          type="text"
+                          maxlength="11"
+                          class="form-control" 
+                          name="phone" 
+                          id="phone"
+                          aria-describedby="helpId" placeholder="手机号"
+                          />
+                      </div>
+                    </form>
+                    
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button @click="add()" type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+        
+    </div>
+
+
+    
+    <div class="row mt-3">
+        <table class="table table-striped text-center">
+            <thead>
+              <tr>
+                <th scope="col">姓名</th>
+                <th scope="col">身份证号</th>
+                <th scope="col">手机号</th>
+                <th scope="col">状态</th>
+                <th scope="col">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item,index) in pList" :key="index">
+                <template  v-if="index!=editId">
+                  <td>{{item.name}}</td>
+                  <td>{{item.id}}</td>
+                  <td>{{item.phone}}</td>
+                  <td>{{item.state}}</td>
+                  <td>
+                  
+                      
+                        <button type="button" class="btn btn-outline-danger" @click="edit(index,item)" >编辑</button>
+                      
+                      
+                        <button type="button" class="btn btn-outline-warning" @click="rm(item.id)" >删除</button>
+                      
+                    
+                  </td>
+                </template>
+
+                <template v-else>
+                  <td><input type="text" v-model="editName" ></td>
+                  <td>{{item.id}}</td>
+                  <td><input type="text" v-model="editPhone" ></td>
+                  <td>{{item.state}}</td>
+                  <td>
+                   
+
+                        <button @click="update(item.id)" type="button" class="btn btn-outline-danger">保存</button>
+                      
+                        <button type="button" class="btn btn-outline-warning" @click="cancel()">取消</button>
+                    
+                 
+                  </td>
+                </template>
+
+
+
+              </tr>
+
+            </tbody>
+          </table>
+    </div>
+</div>
+<!-- 尾部 -->
+<div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <p class="lead text-center font-weight-lighter">cpoyrigth Freya@2022</p>
+            </div>
+</div>
+
+
+<script>
+  let vm = new Vue({
+    el:'#app',
+    data: {
+      editId:'-1',
+      pList:[],
+      id:'',
+      name:'',
+      id_card:'',
+      phone:'',
+      editName:'',
+      editIdCard:'',
+      editPhone:'',
+    },
+    methods:{
+      rms(id){
+        console.log(id);
+      },
+      load(){
+        let url='http://localhost:8080/hospital/patient/select';
+      axios.get(url).then( res => {
+        this.pList = res.data;
+      }
+      ).catch(err => {
+        console.log(err);
+      })
+      },
+      edit(i,item){
+        this.editId=i;
+        this.editName=item.name;
+        this.editIdCard=item.id;
+        this.editPhone=item.phone;
+      },
+      update(id){
+        this.editId = -1;
+        let url=`http://localhost:8080/hospital/patient/${id}`;
+        let params={
+          name:this.editName,
+          id:this.editIdCard,
+          phone:this.editPhone
+        };
+        axios.put(url,params)
+            .then(res =>{
+             this.load();
+        })
+        .catch(err =>{
+          console.log(err);
+        })
+      },
+      cancel(){
+        this.editId = -1;
+      },
+      rm(id){
+        let url='http://localhost:8080/hospital/patient/delete/'+id;
+        axios.delete(url).then(res => {
+          this.load();
+        }).catch(err => {
+          console.log(err);
+        })
+      },
+    //   add(){
+    //   let patient={
+    //     'name':this.name,
+    //     'idCard':this.id_card,
+    //     'phone':this.phone
+    //   }
+    //   let url='http://localhost:8080/hospital/patient';
+    //   axios.post(url,patient).then(res => {
+    //     this.load();
+    //   }).catch(err => {
+    //     console.log(err);
+    //   });
+    //         this.name='';
+		// 				this.id_card='';
+		// 				this.phone='';
+
+    // }
+    },
+
+    created(){
+      let url='http://localhost:8080/hospital/patient/select';
+      axios.get(url).then( res => {
+        this.pList = res.data;
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+  });
+</script>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

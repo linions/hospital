@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>登录页面</title>
+
+	<link rel="stylesheet" type="text/css" href="./1.css">
+	<!-- 导入 vue 库文件 -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+	<!-- 从 CDN 导入 axios  -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+	
+
+</head>
+
+<body>
+		<div id="app">
+			<div class="box"  method="post" >
+				<img src="./img/logo.png" style="height: 200px;width: 200px; " alt="">
+				<div v-if="this.exist">
+					<h1>用户登录</h1>
+					<input id="idCard" type="text" onkeyup="value=value.replace(/[^\d|x]{1}/g,'')" maxlength="18" v-model="id_card" placeholder="ID号">
+					<input id="patientPhone" type="password" onkeyup="value=value.replace(/[^\d|x]{1}/g,'')" maxlength="11" v-model="phone" placeholder="密码">
+					<button type="button" v-if="this.exist" @click="loginBtn(patients)"  id="loginBtn" >登录</button>
+				</div>
+				<div v-else>
+					<h1>用户注册</h1>
+					<input id="idCard" type="text"  v-model="id_card" placeholder="ID号（身份证号）">
+					<input id="patientName"  type="text"  onkeyup="value=value.replace(/[\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[\d]/g,''))" maxlength="10" v-model="name" placeholder="姓名">
+					<input id="patientPhone" type="password" v-model="phone" placeholder="密码(手机号）">
+					<button type="button" @click="registerBtn()"  id="registerBtn" >注册</button>
+				</div>
+			</div>
+		</div>
+</body>
+
+<script>
+let vue = new Vue({
+	  el: '#app',
+	  data: {
+   	  patients:[],
+	  id_card:'430103200104020043',
+	  name:'',
+	  phone:'15011111111',
+	  ids:[],
+	  names:[],
+	  phones:[],
+	  exist:true,
+    },
+
+
+    created() {
+      let url = 'http://localhost:8080/hospital/patient/select';
+      axios.get(url).then(res => {
+        this.patients = res.data;
+				console.log(this.patients);
+      }).catch(err => {
+        console.error(err);
+      });
+
+    },
+
+    methods: {
+		loginBtn(patients){
+			this.exist=true;
+			// 默认按钮不可点击以及不出现姓名和电话
+			let size=patients.length;
+			for(let i=0;i<size;i++){
+				this.ids[i]=this.patients[i].id;
+				this.names[i]=this.patients[i].name;
+				this.phones[i]=this.patients[i].phone;
+			};
+		
+				console.log(this.id_card);
+				console.log(this.phone);
+				console.log(this.ids);
+				console.log(this.phones);
+			if(this.ids.indexOf(this.id_card)!=-1 &&this.phones[this.ids.indexOf(this.id_card)]==(this.phone)){
+				alert("登录成功！！");
+				window.location.href='./DoctorAppointment.html';
+			}else if(this.ids.indexOf(this.id_card)!=-1){
+				this.phone='';
+				alert("密码错误！！");
+			}else{
+				alert("没有该就诊人，请先注册。");
+				this.id_card='';
+				this.name='';
+				this.phone='';
+				this.exist=false;
+			}
+			if(window.localStorage){
+					localStorage.value=this.id_card;
+					Location.href="./DoctorAppointment.html";
+			}
+
+      },
+
+	  registerBtn(){					
+			let url = 'http://localhost:8080/hospital/patient';
+			let params = {
+				'id': this.id_card,
+				'name': this.name,
+				'phone':this.phone
+	  		};
+				axios.post(url,params).then(res=>{
+					console.log(params);
+				}).catch(err=>{console.log(err);})
+
+				alert("注册成功！！");
+				window.location.reload();
+
+	},
+
+}
+  })
+</script>
+
+
+</html>
